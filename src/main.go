@@ -54,10 +54,8 @@ func main() {
 	})
 
 	discord.Open()
+	defer discord.Close()
 
 	w := window.CreateWindow(discord, discordGuildId, discordChannelId)
-	w.SetOnClosed(func() {
-		discord.Close()
-	})
 	w.ShowAndRun()
 }
