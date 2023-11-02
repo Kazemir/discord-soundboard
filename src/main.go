@@ -10,23 +10,13 @@ import (
 )
 
 var (
-	discordBotToken  = os.Getenv("DISCORD_BOT_TOKEN")
-	discordGuildId   = os.Getenv("DISCORD_GUILD_ID")
-	discordChannelId = os.Getenv("DISCORD_CHANNEL_ID")
-	isDebug          = os.Getenv("IS_DEBUG") == "true"
+	discordBotToken = os.Getenv("DISCORD_BOT_TOKEN")
+	isDebug         = os.Getenv("IS_DEBUG") == "true"
 )
 
 func main() {
 	if discordBotToken == "" {
 		fmt.Println("DISCORD_BOT_TOKEN is not set")
-		return
-	}
-	if discordGuildId == "" {
-		fmt.Println("DISCORD_GUILD_ID is not set")
-		return
-	}
-	if discordChannelId == "" {
-		fmt.Println("DISCORD_CHANNEL_ID is not set")
 		return
 	}
 
@@ -56,6 +46,6 @@ func main() {
 	discord.Open()
 	defer discord.Close()
 
-	w := window.CreateWindow(discord, discordGuildId, discordChannelId)
+	w := window.CreateWindow(discord)
 	w.ShowAndRun()
 }
